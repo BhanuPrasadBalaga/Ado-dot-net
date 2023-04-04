@@ -42,6 +42,30 @@ namespace LoginForm
 
         private void btLogin_Click(object sender, EventArgs e)
         {
+            string username = tbEmail.Text;
+            string password = tbPassword.Text;
+            
+            if (username == "")
+            {
+                tbEmail.BackColor = Color.Lime;
+                MessageBox.Show("Please enter your email", "validation error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                tbEmail.Focus();
+            }
+
+            else if (!IsValidEmail(tbEmail.Text))
+            {
+                tbEmail.BackColor = Color.Peru;
+                MessageBox.Show("Please enter a valid email address","Validation error", MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                tbEmail.Focus();
+            }
+            else if (password == "")
+            {
+                tbPassword.BackColor = Color.Lime;
+                MessageBox.Show("Enter a valid password", "validation error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+            
             
             
             // Form1 f1 = new Form1();
@@ -54,6 +78,48 @@ namespace LoginForm
             Form1 f1 = new Form1();
             f1.Show();
             this.Hide();
+        }
+
+
+        private void tbUserName_TextChanged(object sender, EventArgs e)
+        {
+            tbEmail.BackColor = Color.White;
+        }
+
+        private bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private void tbPassword_TextChanged(object sender, EventArgs e)
+        {
+            tbPassword.BackColor = Color.White;
+        }
+
+        private void btHide_Click(object sender, EventArgs e)
+        {
+            if (tbPassword.PasswordChar == '\0')
+            {
+                btView.BringToFront();
+                tbPassword.PasswordChar = '*';
+            }
+        }
+
+        private void btView_Click(object sender, EventArgs e)
+        {
+            if (tbPassword.PasswordChar == '*')
+            {
+                btHide.BringToFront();
+                tbPassword.PasswordChar = '\0';
+            }
         }
     }
 }
