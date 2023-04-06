@@ -65,10 +65,29 @@ namespace LoginForm
                 MessageBox.Show("Enter a valid password", "validation error", MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
-            
-            
-            
-            // Form1 f1 = new Form1();
+
+            string con = "server=localhost;user=root;database=bhanudb;port=3306;password=Prasad$289";
+            MySqlConnection connection = new MySqlConnection(con);
+
+            using (MySqlCommand cmd = new MySqlCommand($"select * from user where email = 'tbEmail.Text', password = 'tbPassword.Text'"))
+            {
+                try
+                {
+                    
+                }
+                catch
+                {
+                    
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
+
+
+            // Form1 f1 = new Form1(); 
             // f1.Show();
             // this.Close();
         }
