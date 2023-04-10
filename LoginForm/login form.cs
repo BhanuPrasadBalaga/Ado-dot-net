@@ -43,8 +43,8 @@ namespace LoginForm
         private void btLogin_Click(object sender, EventArgs e)
         {
             string username = tbEmail.Text;
-            string password = tbPassword.Text;
-            
+            string pwd = tbPassword.Text;
+
             if (username == "")
             {
                 tbEmail.BackColor = Color.Lime;
@@ -56,40 +56,58 @@ namespace LoginForm
             else if (!IsValidEmail(tbEmail.Text))
             {
                 tbEmail.BackColor = Color.Peru;
-                MessageBox.Show("Please enter a valid email address","Validation error", MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                MessageBox.Show("Please enter a valid email address", "Validation error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
                 tbEmail.Focus();
             }
-            else if (password == "")
+            else if (pwd == "")
             {
                 tbPassword.BackColor = Color.Lime;
                 MessageBox.Show("Enter a valid password", "validation error", MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
+                tbPassword.Focus();
             }
 
-            string con = "server=localhost;user=root;database=bhanudb;port=3306;password=Prasad$289";
-            MySqlConnection connection = new MySqlConnection(con);
-
-            using (MySqlCommand cmd = new MySqlCommand($"select * from user where email = 'tbEmail.Text', password = 'tbPassword.Text'"))
+            else
             {
-                try
-                {
+                string con = "server=localhost;user=root;database=bhanudb;port=3306;password=Prasad$289";
+                MySqlConnection connection = new MySqlConnection(con);
+                
+                    MySqlCommand cmd =
+                        new MySqlCommand(
+                            "SELECT * FROM user WHERE email = @email and password = @password",
+                            connection);
+
+                    cmd.Parameters.AddWithValue("@email", username);
+                    cmd.Parameters.AddWithValue("@password", pwd);
                     
-                }
-                catch
-                {
-                    
-                }
-                finally
-                {
+                    MySqlDataAdapter red = new MySqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    red.Fill(dt);
+                    connection.Open();
+                    int i = cmd.ExecuteNonQuery();
                     connection.Close();
-                }
+                    if (dt.Rows.Count>0)
+                    {
+                        MessageBox.Show("Login Successfull", "Login Attempt", MessageBoxButtons.OK,
+                            MessageBoxIcon.Asterisk);
+                        this.Close();
+                    }
+                    
+                    else
+                    {
+                        MessageBox.Show("Login details not Found!", "Login Error", MessageBoxButtons.OK,
+                            MessageBoxIcon.Exclamation);
+                        tbEmail.Clear();
+                        tbPassword.Clear();
+                    }
             }
+            
 
 
-
-            // Form1 f1 = new Form1(); 
-            // f1.Show();
-            // this.Close();
+                // Form1 f1 = new Form1(); 
+                // f1.Show();
+                // this.Close()
         }
 
         private void btRegister_Click(object sender, EventArgs e)

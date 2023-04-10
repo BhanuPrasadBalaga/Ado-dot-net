@@ -83,6 +83,7 @@ namespace LoginForm
             // tbPassword
             // 
             this.tbPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbPassword.ForeColor = System.Drawing.Color.Black;
             this.tbPassword.Location = new System.Drawing.Point(371, 153);
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.PasswordChar = '*';
@@ -106,10 +107,11 @@ namespace LoginForm
             // 
             this.btHide.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btHide.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btHide.ForeColor = System.Drawing.Color.Transparent;
             this.btHide.Image = ((System.Drawing.Image)(resources.GetObject("btHide.Image")));
-            this.btHide.Location = new System.Drawing.Point(572, 155);
+            this.btHide.Location = new System.Drawing.Point(563, 155);
             this.btHide.Name = "btHide";
-            this.btHide.Size = new System.Drawing.Size(21, 25);
+            this.btHide.Size = new System.Drawing.Size(30, 24);
             this.btHide.TabIndex = 6;
             this.btHide.UseVisualStyleBackColor = false;
             this.btHide.Click += new System.EventHandler(this.btHide_Click);
@@ -118,10 +120,11 @@ namespace LoginForm
             // 
             this.btView.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btView.ForeColor = System.Drawing.Color.Transparent;
             this.btView.Image = ((System.Drawing.Image)(resources.GetObject("btView.Image")));
-            this.btView.Location = new System.Drawing.Point(572, 155);
+            this.btView.Location = new System.Drawing.Point(563, 155);
             this.btView.Name = "btView";
-            this.btView.Size = new System.Drawing.Size(22, 26);
+            this.btView.Size = new System.Drawing.Size(30, 24);
             this.btView.TabIndex = 7;
             this.btView.UseVisualStyleBackColor = false;
             this.btView.Click += new System.EventHandler(this.btView_Click);
@@ -140,6 +143,7 @@ namespace LoginForm
             this.Controls.Add(this.tbEmail);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btLogin);
+            this.ForeColor = System.Drawing.Color.Black;
             this.Name = "login_form";
             this.Text = "Search_form";
             this.ResumeLayout(false);
